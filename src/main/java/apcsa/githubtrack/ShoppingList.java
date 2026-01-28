@@ -1,6 +1,6 @@
 package apcsa.githubtrack;
 
-// Implement the ShoppingList class here
+// Implement your ShoppingList class here
 public class ShoppingList{
     private int capacity = 8;
     private int size = 0;

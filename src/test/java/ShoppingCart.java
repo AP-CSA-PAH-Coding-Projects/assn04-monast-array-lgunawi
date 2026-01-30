@@ -1,4 +1,3 @@
-package apcsa.githubtrack;
 
 // Implement your ShoppingCart class here
 public class ShoppingCart{
@@ -6,7 +5,6 @@ public class ShoppingCart{
     private String custName;
     private boolean shopComplete = false;
     private static int totalReturned = 0;
-    private boolean cartReturned = false; 
 
     public ShoppingCart(String custName, ShoppingList list){
         this.list = list;
@@ -19,28 +17,25 @@ public class ShoppingCart{
 
     }
 
+
+
     public boolean isCompleted(){
         int count = 0; 
         for (int i = 0; i < list.getSize(); i++){
-            if (list.getAt(i) != null && (list.getAt(i).isSold())){
+            if (!(list.getAt(i).isSold())){
                 count++;
             }
         }
-        if (list.getSize() == count){
-           shopComplete = true; 
-
+        if (count > 0){
+            return false;
         }
-        return shopComplete;
-
+        return true;
     }
     public void returnCart(){
-        if (this.isCompleted() && !cartReturned){
-            
-            cartReturned = true; 
+        if (shopComplete){
             totalReturned++; 
-        }
-       
 
+        }
     }
 
     public static int getTotalCartsReturned(){

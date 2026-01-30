@@ -1,4 +1,3 @@
-package apcsa.githubtrack;
 
 // Implement your ShoppingItem class here
 public class ShoppingItem{
@@ -25,29 +24,23 @@ public class ShoppingItem{
 
     public int compareTo(ShoppingItem other){
         
+        
         if ((name.equals(other.getName()))){
-            if (price == other.getPrice()){
-                return 0;
-            } else if (price < other.getPrice()){
-                int num = other.getPrice() - price;
-                return num;
-            } else if (price > other.getPrice()){
-                int num = other.getPrice() - price;
-                return num;
-            }
+            return price -  (int) other.getPrice();
+            
         }
         else 
-            System.out.println("Error: Different items!");
-        return 0;
+           { System.out.println("Error: Different items!");
+        return 0; }
     }
 
     public String getName(){
         return name;
 
     }
-    public int getPrice(){
-      //  double dollars = ((double) price) / 100;
-        return price;
+    public double getPrice(){
+      double dollars = ((double) price) / 100;
+        return dollars;
     }
     public boolean isSold(){
         return sold;

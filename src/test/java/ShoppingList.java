@@ -115,7 +115,7 @@ public class ShoppingList implements MyList {
     }
    
     public boolean isIdentical(ShoppingList other){
-        if(other.getSize() != size){
+        if(other.getSize() != this.size){
             return false;
         }
 

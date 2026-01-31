@@ -6,7 +6,7 @@ public class ShoppingCart{
     private String custName;
     private boolean shopComplete = false;
     private static int totalReturned = 0;
-    private boolean cartReturned = false; 
+    private int cartReturned = 0; 
 
     public ShoppingCart(String custName, ShoppingList list){
         this.list = list;
@@ -34,9 +34,10 @@ public class ShoppingCart{
 
     }
     public void returnCart(){
-        if (this.isCompleted() && !cartReturned){
+        this.isCompleted(); 
+        if (this.shopComplete == true && cartReturned < 1){
             
-            cartReturned = true; 
+            cartReturned++; 
             totalReturned++; 
         }
        

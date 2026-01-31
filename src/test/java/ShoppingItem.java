@@ -7,7 +7,7 @@ public class ShoppingItem{
 
     public ShoppingItem(String name, int price){
         this.name = name;
-        this.price = price;
+        this.price = price ;
 
     }
 
@@ -16,17 +16,17 @@ public class ShoppingItem{
     }
 
     public boolean equals(ShoppingItem other){
-        if (name.equals(other.getName()) && price == other.getPrice()){
+        if (name.equals(other.getName()) && this.getPrice() == other.getPrice()){
             return true;
         }
         return false;
     }
 
-    public int compareTo(ShoppingItem other){
+    public double compareTo(ShoppingItem other){
         
         
-        if ((name.equals(other.getName()))){
-            return price -  (int) other.getPrice();
+        if ((this.name.equals(other.getName()))){
+            return (this.getPrice() -  other.getPrice());
             
         }
         else 
@@ -38,10 +38,11 @@ public class ShoppingItem{
         return name;
 
     }
+   
     public double getPrice(){
       double dollars = ((double) price) / 100;
         return dollars;
-    }
+    } 
     public boolean isSold(){
         return sold;
 

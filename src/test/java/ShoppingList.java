@@ -1,4 +1,3 @@
-package apcsa.githubtrack;
 
 // Implement the ShoppingList class here
 public class ShoppingList implements MyList {
@@ -8,61 +7,54 @@ public class ShoppingList implements MyList {
 
     
     public void addToEnd(ShoppingItem item){
-        for (int i = 0; i < size; i++){
+       /*  for (int i = 0; i < size -1; i++){
             if (storage[i] == null){
                 storage[i] = item; 
                 i = capacity;
             }
-            if (storage[i] != null){
-            }
-        }
+            
+        } */
         if (size + 1 > capacity){
             makeCapacity(capacity * 2);
-            storage[size] = item;
+            
         }
+        storage[size] = item;
         size++; 
     }
     public void insertAt(int index, ShoppingItem item){
-        int count = 0;
+      
 
-        if (index < 0 || index > storage.length){
+        if (index < 0 || index > size){
             System.out.println("Invalid index!");
         }
-        for (int i = 0; i < storage.length; i++){
-            if (storage[i] != null){
-                count++;
-            }
-        }
-        if (count >= storage.length){
-            makeCapacity(storage.length + 1);
+        
+        if (size + 1 > capacity){
+            makeCapacity(size + 1);
 
         }
-        ShoppingItem[] temp = new ShoppingItem[storage.length];
-        for (int i = 0; i < index; i++){
-            temp[i] = storage[i];
+        for (int i = size - 1; i >= index; i--){
+            storage[i+1] = storage[i];
+
         }
-        for (int i = index; i < temp.length; i++){
-            temp[i+1] = storage[i];
-        }
-        temp[index] = item;
-        storage = temp;
+        storage[index] = item;
+        size++; 
+        
+
     }
     public void removeAt(int index){
-        if (index < 0 || index > storage.length){
+        if (index < 0 || index > size){
             System.out.println("Invalid index!");
         }
-        ShoppingItem[] temp = new ShoppingItem[storage.length];
-        for (int i = 0; i < index; i++){
-            temp[i] = storage[i];
+
+        for (int i = index; i < size -1; i++){
+            storage[i] = storage[i+1];
         }
-        for (int i = index; i < storage.length; i++){
-            temp[i] = storage[i+1];
-        }
-        storage = temp;
+        
+        size--;
 
     }
     public ShoppingItem getAt(int index){
-        if (index < 0 || index > size){
+        if (index < 0 || index > size || storage[index] == null){
             System.out.println("Invalid index!");
         }
         ShoppingItem item = storage[index];
@@ -101,13 +93,13 @@ public class ShoppingList implements MyList {
     }
 
     public void goShopping(){
-        for (int i = 0; i < storage.length; i++){
+        for (int i = 0; i < size; i++){
             storage[i].buy();
         }
     }
     public void goShopping(ShoppingList toBuy){
-        for (int i = 0; i < toBuy.getSize(); i++){
-            for (int j = 0; i < storage.length; j++){
+        for (int i = 0; i < toBuy.getSize() ; i++){
+            for (int j = 0; j < size; j++){
                 if (toBuy.getAt(i).getName().equals(storage[j].getName())){
                     storage[j].buy();
                 }
@@ -116,36 +108,38 @@ public class ShoppingList implements MyList {
     }
     public double totalPrice(){
         double total = 0;
-        for (int i = 0; i < storage.length; i++){
+        for (int i = 0; i < size; i++){
             total += storage[i].getPrice();
         }
         return total;
     }
    
     public boolean isIdentical(ShoppingList other){
-        if(other.getSize() != size){
+        if(other.getSize() != this.size){
             return false;
         }
 
-
+        int numPairs = 0; 
         for (int i = 0; i < size; i++){
-            int count = 0;
+
+
             for (int j = 0; j < size; j++){
-                if (storage[i] == other.getAt(j)){
-                    count++;
+                if (storage[i].equals(other.getAt(j))){
+                    numPairs++;
                 }
             }
-            for (int k = 0; k < storage.length; k++){
+            /*for (int k = 0; k < size; k++){
                 if (storage[i] == storage[k]){
                     count++;
                 }
-            }
-            if (count != 2){
-                return false;
-            } 
-        
+            } */
+           
+            
         }
-        return true; 
+        if (numPairs == size){
+                return true;
+            }
+        return false; 
     }
     
 

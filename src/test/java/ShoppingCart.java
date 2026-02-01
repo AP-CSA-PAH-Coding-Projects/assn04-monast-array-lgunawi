@@ -5,6 +5,7 @@ public class ShoppingCart{
     private String custName;
     private boolean shopComplete = false;
     private static int totalReturned = 0;
+    private boolean cartReturned = false; 
 
     public ShoppingCart(String custName, ShoppingList list){
         this.list = list;
@@ -17,27 +18,30 @@ public class ShoppingCart{
 
     }
 
-
-
     public boolean isCompleted(){
-        int count = 0; 
+        int count = 0;
         for (int i = 0; i < list.getSize(); i++){
-            if (!(list.getAt(i).isSold())){
+            if (list.getAt(i) != null && (list.getAt(i).isSold())){
                 count++;
             }
         }
-        if (count > 0){
-            return false;
+        if (list.getSize() == count){
+           shopComplete = true; 
+
         }
-        return true;
+        return shopComplete;
+
     }
     public void returnCart(){
-        if (shopComplete){
+        if (this.isCompleted() && cartReturned == false){
+            
+            this.cartReturned = true; 
             totalReturned++; 
-
-        }
+        }  
     }
-
+    public int getCartsReturned(){
+        return totalReturned;
+    }
     public static int getTotalCartsReturned(){
         return totalReturned;
     }
